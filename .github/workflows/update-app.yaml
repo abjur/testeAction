@@ -39,6 +39,11 @@ jobs:
         run: |
           git config --local user.email "actions@github.com"
           git config --local user.name "GitHub Actions"
-          Rscript -E
-          git checkout gh-pages
+          Rscript "inst/update-site.R"
           Rscript "inst/update-app.R"
+          git checkout gh-pages
+          Rscript "inst/update-report.R"
+          git add -A
+          git commit -m "Update site"
+          git push origin gh-pages
+          git checkout main

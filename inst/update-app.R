@@ -1,12 +1,3 @@
-pkgdown::build_site_github_pages()
-
-rmarkdown::render_site("inst/book")
-pagedown::chrome_print(
-  "inst/book/obs_test.html",
-  output = "inst/book/relatorio/obs_test.pdf",
-  extra_args = c("--disable-gpu", "--no-sandbox")
-)
-
 # shiny app ----
 
 # cat(stringr::str_glue(
