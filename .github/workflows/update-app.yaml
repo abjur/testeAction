@@ -21,6 +21,7 @@ jobs:
             any::fs
             any::rmarkdown
             any::pagedown
+            any::remotes
       - name: Install remotes, and the updated package
         env:
           GITHUB_PAT: ${{ secrets.PAT }}
