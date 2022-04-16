@@ -39,14 +39,13 @@ jobs:
           git add -f inst/book/relatorio/*
           git commit -m "Update Relatorio"
           git fetch
-          git checkout gh-pages
+          git checkout -f gh-pages
           git checkout tmp-branch -- inst/book/relatorio
           mv inst/book/relatorio docs/
           rm -R inst
           git add -A
           git commit -m "Add relatorio to gh-pages branch"
           git push
-          git branch -D tmp-branch
           git checkout main
       - name: Atualizando App
         env:
