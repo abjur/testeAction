@@ -38,6 +38,7 @@ jobs:
           git checkout -B tmp-branch
           git add -f inst/book/relatorio/*
           git commit -m "Update Relatorio"
+          git fetch
           git checkout gh-pages
           git checkout tmp-branch -- inst/book/relatorio
           mv inst/book/relatorio docs/
