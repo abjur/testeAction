@@ -40,15 +40,3 @@ jobs:
           git config --local user.email "actions@github.com"
           git config --local user.name "GitHub Actions"
           Rscript "inst/update-app.R"
-          git checkout gh-pages
-          cd docs
-          git checkout master -- inst/book/relatorio
-          git add relatorio
-          git commit -m "Adding 'relatorio' directory from 'master' branch."
-          git checkout master
-      - name: Deploy to GitHub pages
-        uses: JamesIves/github-pages-deploy-action@4.1.4
-        with:
-          clean: false
-          branch: gh-pages
-          folder: docs
