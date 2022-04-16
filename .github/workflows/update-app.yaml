@@ -23,27 +23,28 @@ jobs:
             any::pagedown
             any::remotes
       - name: Install remotes, and the updated package
-        env:
-          GITHUB_PAT: ${{ secrets.PAT }}
         run: |
           remotes::install_github("abjur/obsTemplate")
           remotes::install_github("abjur/testeAction", force = TRUE)
         shell: Rscript {0}
-      - name: Execute Script
-        env:
-          GITHUB_PAT: ${{ secrets.PAT }}
-          SHINYAPPS_TOKEN: ${{ secrets.SAT }}
-          SHINYAPPS_SECRET: ${{ secrets.SAS }}
-          AUTH0_KEY: ${{ secrets.A0K }}
-          AUTH0_SECRET: ${{ secrets.A0S }}
+      - name: Atualizando Site
         run: |
           git config --local user.email "actions@github.com"
           git config --local user.name "GitHub Actions"
           Rscript "inst/update-site.R"
-          Rscript "inst/update-app.R"
+      - name: Atualizando Relatorio
+        run: |
           git checkout gh-pages
           Rscript "inst/update-report.R"
           git add -A
           git commit -m "Update site"
           git push origin gh-pages
           git checkout main
+      - name: Atualizando App
+        env:
+          SHINYAPPS_TOKEN: ${{ secrets.SAT }}
+          SHINYAPPS_SECRET: ${{ secrets.SAS }}
+          AUTH0_KEY: ${{ secrets.A0K }}
+          AUTH0_SECRET: ${{ secrets.A0S }}
+        run: |
+          Rscript "inst/update-app.R"
